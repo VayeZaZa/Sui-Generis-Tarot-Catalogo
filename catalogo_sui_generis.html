@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sui Generis Tarot - Catálogo</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+
+  :root{
+    --bg-deep: #1c0f30;
+    --bg-mid: #2b1850;
+    --purple: #6b46b8;
+    --lavender: #b9a6e0;
+    --gold: #cba869;
+    --gold-light: #e6cfa0;
+    --ink: #f3ecff;
+    --ink-dim: #c9bce3;
+    --card-fill: #241246;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  body{
+    background: var(--bg-deep);
+    display:flex;
+    justify-content:center;
+    padding: 40px 0;
+  }
+
+  .canvas{
+    width: 1080px;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(107,70,184,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 85%, rgba(107,70,184,0.25) 0%, transparent 50%),
+      linear-gradient(180deg, #1c0f30 0%, #241246 45%, #1a0e2b 100%);
+    overflow: hidden;
+    padding: 90px 80px 100px;
+  }
+
+  .canvas::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 10% 6%, var(--gold-light) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 85% 4%, var(--gold-light) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 92% 20%, var(--lavender) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 6% 25%, var(--lavender) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 78% 40%, var(--gold-light) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 20% 50%, var(--lavender) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 95% 65%, var(--gold-light) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 4% 75%, var(--lavender) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 88% 88%, var(--lavender) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 12% 95%, var(--gold-light) 0%, transparent 60%);
+    opacity:0.7;
+    pointer-events:none;
+  }
+
+  /* ===== HEADER ===== */
+  .header{ position:relative; text-align:center; margin-bottom: 70px; }
+
+  .emblem{
+    width: 170px; height: 170px;
+    margin: 0 auto 26px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(circle, rgba(107,70,184,0.25) 0%, rgba(28,15,48,0.4) 100%);
+    position: relative;
+  }
+  .emblem::before{
+    content:'';
+    position:absolute; inset: -14px;
+    border: 1px solid rgba(203,168,105,0.4);
+    border-radius:50%;
+  }
+
+  .brand{
+    font-family:'Cinzel', serif;
+    font-size: 46px;
+    letter-spacing: 10px;
+    color: var(--ink);
+    font-weight: 600;
+    text-shadow: 0 0 24px rgba(203,168,105,0.35);
+  }
+  .brand-sub{
+    font-family:'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 12px;
+    color: var(--gold);
+    margin-top: 10px;
+  }
+  .tagline{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ink-dim);
+    margin-top: 22px;
+  }
+
+  .divider{
+    display:flex; align-items:center; gap:16px;
+    width: 320px; margin: 34px auto 0;
+  }
+  .divider .line{ flex:1; height:1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .divider .star{ color: var(--gold); font-size: 16px; }
+
+  /* ===== SECTION TITLES ===== */
+  .section-title{
+    text-align:center;
+    font-family:'Cinzel', serif;
+    font-size: 34px;
+    letter-spacing: 5px;
+    color: var(--gold-light);
+    margin: 70px 0 10px;
+  }
+  .section-subtitle{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink-dim);
+    margin-bottom: 40px;
+  }
+
+  /* ===== TIRADAS COMUNES (cards simples) ===== */
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  .card{
+    position:relative;
+    background: linear-gradient(160deg, rgba(107,70,184,0.18) 0%, rgba(28,15,48,0.5) 100%);
+    border: 1px solid rgba(203,168,105,0.35);
+    border-radius: 4px;
+    padding: 26px 26px 24px;
+  }
+  .card::before{
+    content:'';
+    position:absolute; top:10px; left:10px; right:10px; bottom:10px;
+    border: 1px solid rgba(203,168,105,0.15);
+    pointer-events:none;
+  }
+  .card-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom: 12px; gap: 10px;
+  }
+  .card-title{
+    font-family:'Cinzel', serif;
+    font-size: 20px;
+    color: var(--ink);
+    letter-spacing: 1px;
+  }
+  .card-price{
+    font-family:'Cinzel', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+  .card-desc{
+    font-family:'Cormorant Garamond', serif;
+    font-size: 18.5px;
+    line-height: 1.5;
+    color: var(--ink-dim);
+  }
+
+  /* mini diagrama para tiradas de 1 carta */
+  .mini-diagram{ display:flex; justify-content:center; margin: 6px 0 14px; }
+
+  /* ===== TIRADAS ESPECIALES (con diagrama) ===== */
+  .spread{
+    position:relative;
+    background: linear-gradient(160deg, rgba(107,70,184,0.18) 0%, rgba(28,15,48,0.5) 100%);
+    border: 1px solid rgba(203,168,105,0.35);
+    border-radius: 4px;
+    padding: 32px 34px 30px;
+    margin-bottom: 30px;
+  }
+  .spread::before{
+    content:'';
+    position:absolute; top:10px; left:10px; right:10px; bottom:10px;
+    border: 1px solid rgba(203,168,105,0.15);
+    pointer-events:none;
+  }
+  .spread-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom: 8px;
+  }
+  .spread-title{
+    font-family:'Cinzel', serif;
+    font-size: 24px;
+    color: var(--ink);
+    letter-spacing: 1px;
+  }
+  .spread-price{
+    font-family:'Cinzel', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+  }
+  .spread-quantity{
+    font-family:'Montserrat', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .spread-desc{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-dim);
+    margin-bottom: 18px;
+  }
+  .spread-body{
+    display:flex;
+    gap: 34px;
+    align-items:center;
+  }
+  .spread-diagram{ flex-shrink:0; }
+  .spread-meanings{ flex:1; }
+  .spread-meanings ol{
+    list-style: none;
+    counter-reset: none;
+  }
+  .spread-meanings li{
+    font-family:'Montserrat', sans-serif;
+    font-size: 15.5px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin-bottom: 8px;
+    padding-left: 30px;
+    position: relative;
+  }
+  .spread-meanings li .num{
+    position:absolute; left:0; top:0;
+    color: var(--gold-light);
+    font-family:'Cinzel', serif;
+    font-weight:600;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer{ margin-top: 80px; text-align:center; }
+  .footer .divider{ margin-bottom: 30px; }
+  .footer-text{
+    font-family:'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .footer-cta{
+    font-family:'Cinzel', serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    margin-top: 16px;
+  }
+  .payments{
+    margin-top: 46px;
+    display:flex;
+    justify-content:center;
+    gap: 60px;
+  }
+  .payment-block{ text-align:center; }
+  .payment-label{
+    font-family:'Montserrat', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .payment-name{
+    font-family:'Cinzel', serif;
+    font-size: 19px;
+    letter-spacing: 2px;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<div class="canvas">
+
+  <div class="header">
+    <div class="emblem">
+      <svg width="90" height="90" viewBox="0 0 100 100">
+        <path d="M28 30 C26 18, 34 10, 38 8 C36 16, 40 20, 44 20 C42 12, 48 6, 52 6 C50 14, 56 18, 62 20 C64 10, 70 16, 72 28 C74 40, 70 55, 62 66 L60 90 L40 90 L38 66 C30 55, 26 42, 28 30 Z"
+              fill="#160a28" stroke="#cba869" stroke-width="1"/>
+        <path d="M40 50 L47 60 L40 66" stroke="#f3ecff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M60 50 L53 60 L60 66" stroke="#f3ecff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M50 38 L52 46 L60 48 L52 50 L50 58 L48 50 L40 48 L48 46 Z" fill="#cba869"/>
+      </svg>
+    </div>
+    <div class="brand">SUI GENERIS</div>
+    <div class="brand-sub">TAROT</div>
+    <div class="tagline">Catálogo de lecturas</div>
+    <div class="divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+  </div>
+
+  <!-- ================= TIRADAS COMUNES ================= -->
+  <div class="section-title">Tiradas Comunes</div>
+  <div class="section-subtitle">Consultas puntuales, respuesta directa</div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🔮 Sí o No</div>
+        <div class="card-price">$2.000 COP</div>
+      </div>
+      <div class="mini-diagram">
+        <svg width="60" height="76" viewBox="0 0 60 76">
+          <rect x="6" y="6" width="48" height="64" rx="5" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="30" y="46" text-anchor="middle" font-family="Cinzel, serif" font-size="24" font-weight="600" fill="#e6cfa0">1</text>
+        </svg>
+      </div>
+      <div class="card-desc">1. Respuesta a la pregunta (sí o no, con una breve explicación).</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🔮 Pregunta Individual</div>
+        <div class="card-price">$4.000 COP</div>
+      </div>
+      <div class="mini-diagram">
+        <svg width="60" height="76" viewBox="0 0 60 76">
+          <rect x="6" y="6" width="48" height="64" rx="5" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="30" y="46" text-anchor="middle" font-family="Cinzel, serif" font-size="24" font-weight="600" fill="#e6cfa0">1</text>
+        </svg>
+      </div>
+      <div class="card-desc">1. Respuesta e interpretación de la situación.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🔮 3 Preguntas Libres</div>
+        <div class="card-price">$9.000 COP</div>
+      </div>
+      <div class="card-desc">Temas a elección. Ideal para repasar distintas áreas de la vida en una sola consulta.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">🔮 5 Preguntas Libres</div>
+        <div class="card-price">$15.000 COP</div>
+      </div>
+      <div class="card-desc">Lectura completa a elección libre, para profundizar en lo que se necesite saber.</div>
+    </div>
+
+  </div>
+
+  <!-- ================= TIRADAS ESPECIALES ================= -->
+  <div class="section-title">Tiradas Especiales</div>
+  <div class="section-subtitle">Lecturas de amor y vínculos</div>
+
+  <!-- CRUSH -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">❤️ Tirada del Crush</div>
+      <div class="spread-price">$12.000 COP</div>
+    </div>
+    <div class="spread-quantity">6 cartas</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="290" height="330" viewBox="0 0 290 330">
+          <!-- 3 -->
+          <rect x="118" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">3</text>
+          <!-- 2 -->
+          <rect x="58" y="90" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="80" y="128" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">2</text>
+          <!-- 4 -->
+          <rect x="178" y="90" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="200" y="128" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">4</text>
+          <!-- 1 -->
+          <rect x="0" y="170" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="208" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">1</text>
+          <!-- 5 -->
+          <rect x="236" y="170" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="258" y="208" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">5</text>
+          <!-- 6 -->
+          <rect x="118" y="250" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="288" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">6</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Energía actual del crush.</li>
+          <li><span class="num">2.</span> Qué ve en mí.</li>
+          <li><span class="num">3.</span> Qué siente por mí.</li>
+          <li><span class="num">4.</span> Qué piensa de mí.</li>
+          <li><span class="num">5.</span> Hacia dónde podría ir esta conexión.</li>
+          <li><span class="num">6.</span> Consejo del tarot.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSEJO DE CUPIDO -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">💘 Consejo de Cupido</div>
+      <div class="spread-price">$10.000 COP</div>
+    </div>
+    <div class="spread-quantity">5 cartas</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="290" height="290" viewBox="0 0 290 290">
+          <!-- 1 -->
+          <rect x="118" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">1</text>
+          <!-- 4 -->
+          <rect x="0" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">4</text>
+          <!-- 2 -->
+          <rect x="118" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">2</text>
+          <!-- 5 -->
+          <rect x="236" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="258" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">5</text>
+          <!-- 3 -->
+          <rect x="118" y="210" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="248" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">3</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Deseos amorosos.</li>
+          <li><span class="num">2.</span> Estado actual del corazón.</li>
+          <li><span class="num">3.</span> Experiencias emocionales previas.</li>
+          <li><span class="num">4.</span> Lo que no se está viendo.</li>
+          <li><span class="num">5.</span> Consejo del tarot.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTOCONOCIMIENTO -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">🪞 Autoconocimiento</div>
+      <div class="spread-price">$10.000 COP</div>
+    </div>
+    <div class="spread-quantity">5 cartas</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="360" height="90" viewBox="0 0 360 90">
+          <rect x="0" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">1</text>
+          <rect x="79" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="101" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">2</text>
+          <rect x="158" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="180" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">3</text>
+          <rect x="237" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="259" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">4</text>
+          <rect x="316" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="338" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">5</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Plano físico.</li>
+          <li><span class="num">2.</span> Plano emocional.</li>
+          <li><span class="num">3.</span> Plano mental.</li>
+          <li><span class="num">4.</span> Plano espiritual.</li>
+          <li><span class="num">5.</span> Consejo para el crecimiento personal.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAREJA / VINCULO -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">🤝 Pareja / Vínculo</div>
+      <div class="spread-price">$15.000 COP</div>
+    </div>
+    <div class="spread-quantity">10 cartas</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="330" height="310" viewBox="0 0 330 310">
+          <!-- fila 0 -->
+          <rect x="0" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">4</text>
+          <rect x="90" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="112" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">3</text>
+          <rect x="180" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="202" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">5</text>
+          <!-- fila 1 -->
+          <rect x="0" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">6</text>
+          <rect x="90" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="112" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">1</text>
+          <rect x="180" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="202" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">2</text>
+          <rect x="270" y="110" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="292" y="148" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">7</text>
+          <!-- fila 2 -->
+          <rect x="0" y="210" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="248" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">8</text>
+          <rect x="90" y="210" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="112" y="248" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">9</text>
+          <rect x="180" y="210" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="202" y="248" text-anchor="middle" font-family="Cinzel, serif" font-size="18" font-weight="600" fill="#e6cfa0">10</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Tú.</li>
+          <li><span class="num">2.</span> Tu pareja.</li>
+          <li><span class="num">3.</span> Lo que los une.</li>
+          <li><span class="num">4.</span> Lo que tú piensas de la relación.</li>
+          <li><span class="num">5.</span> Lo que la otra persona piensa de la relación.</li>
+          <li><span class="num">6.</span> Lo que tú sientes.</li>
+          <li><span class="num">7.</span> Lo que la otra persona siente.</li>
+          <li><span class="num">8.</span> Lo que tú deseas.</li>
+          <li><span class="num">9.</span> Lo que la otra persona desea.</li>
+          <li><span class="num">10.</span> Lo que actualmente los separa o representa el principal desafío.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERRADURA -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">🐎 Herradura</div>
+      <div class="spread-price">$13.000 COP</div>
+    </div>
+    <div class="spread-quantity">7 cartas</div>
+    <div class="spread-desc">Analizar profundamente una situación específica, desde las influencias del pasado hasta el resultado final.</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="230" height="330" viewBox="0 0 230 330">
+          <!-- 1,2 -->
+          <rect x="30" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="52" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">1</text>
+          <rect x="150" y="10" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="172" y="48" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">2</text>
+          <!-- 3,4 -->
+          <rect x="0" y="100" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="22" y="138" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">3</text>
+          <rect x="180" y="100" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="202" y="138" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">4</text>
+          <!-- 5,6 -->
+          <rect x="30" y="190" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="52" y="228" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">5</text>
+          <rect x="150" y="190" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="172" y="228" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">6</text>
+          <!-- 7 -->
+          <rect x="90" y="266" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="112" y="304" text-anchor="middle" font-family="Cinzel, serif" font-size="22" font-weight="600" fill="#e6cfa0">7</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Pasado.</li>
+          <li><span class="num">2.</span> Presente.</li>
+          <li><span class="num">3.</span> Influencias ocultas.</li>
+          <li><span class="num">4.</span> Obstáculos.</li>
+          <li><span class="num">5.</span> Consejo.</li>
+          <li><span class="num">6.</span> Camino probable.</li>
+          <li><span class="num">7.</span> Resultado.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRUZ CELTA -->
+  <div class="spread">
+    <div class="spread-head">
+      <div class="spread-title">✨ Cruz Celta</div>
+      <div class="spread-price">$18.000 COP</div>
+    </div>
+    <div class="spread-quantity">10 cartas · lectura completa</div>
+    <div class="spread-body">
+      <div class="spread-diagram">
+        <svg width="420" height="400" viewBox="0 0 420 400">
+          <!-- cruz -->
+          <rect x="118" y="60" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="98" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">5</text>
+
+          <rect x="38" y="150" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="60" y="188" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">4</text>
+
+          <!-- carta central 1 -->
+          <rect x="118" y="150" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="188" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">1</text>
+          <!-- carta cruzada 2 (rotada) -->
+          <g transform="rotate(90 140 181)">
+            <rect x="118" y="150" width="44" height="62" rx="4" fill="#2b1850" stroke="#cba869" stroke-width="1.5" opacity="0.92"/>
+            <text x="140" y="188" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">2</text>
+          </g>
+
+          <rect x="198" y="150" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="220" y="188" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">6</text>
+
+          <rect x="118" y="240" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="140" y="278" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">3</text>
+
+          <!-- bastón derecho -->
+          <rect x="330" y="30" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="352" y="68" text-anchor="middle" font-family="Cinzel, serif" font-size="18" font-weight="600" fill="#e6cfa0">10</text>
+
+          <rect x="330" y="115" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="352" y="153" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">9</text>
+
+          <rect x="330" y="200" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="352" y="238" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">8</text>
+
+          <rect x="330" y="285" width="44" height="62" rx="4" fill="#241246" stroke="#cba869" stroke-width="1.5"/>
+          <text x="352" y="323" text-anchor="middle" font-family="Cinzel, serif" font-size="20" font-weight="600" fill="#e6cfa0">7</text>
+        </svg>
+      </div>
+      <div class="spread-meanings">
+        <ol>
+          <li><span class="num">1.</span> Situación actual.</li>
+          <li><span class="num">2.</span> Lo que cruza o desafía la situación.</li>
+          <li><span class="num">3.</span> Raíz del problema.</li>
+          <li><span class="num">4.</span> Pasado reciente.</li>
+          <li><span class="num">5.</span> Objetivo o potencial.</li>
+          <li><span class="num">6.</span> Futuro próximo.</li>
+          <li><span class="num">7.</span> Actitud frente a la situación.</li>
+          <li><span class="num">8.</span> Influencias externas.</li>
+          <li><span class="num">9.</span> Esperanzas y temores.</li>
+          <li><span class="num">10.</span> Resultado probable.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="divider"><span class="line"></span><span class="star">✦</span><span class="line"></span></div>
+    <div class="footer-text">Las cartas no mienten, solo esperan ser leídas.</div>
+    <div class="footer-cta">DM ABIERTO · CONSULTAS Y RESERVAS</div>
+
+    <div class="payments">
+      <div class="payment-block">
+        <div class="payment-label">Pagos nacionales</div>
+        <div class="payment-name">Nequi</div>
+      </div>
+      <div class="payment-block">
+        <div class="payment-label">Pagos internacionales</div>
+        <div class="payment-name">DolarApp</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
